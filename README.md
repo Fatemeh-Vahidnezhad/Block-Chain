@@ -65,6 +65,7 @@ Use the following script to deploy and test your smart contracts inside the Brow
 
 ### **Step 1: Set up Accounts**
 ```python
+from brownie import ContractFactory, PharmacyAndHospital, Distributor, accounts, DrugManufacturer
 manufacturer_account = accounts[0]
 distributor_account = accounts[1]
 receiver_account = accounts[2]
