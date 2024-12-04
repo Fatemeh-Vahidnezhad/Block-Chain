@@ -1,0 +1,56 @@
+ganache:    ganache --hardfork istanbul --miner.blockGasLimit 12000000
+django:     python manage.py runserver
+
+
+
+brownie console --network development
+brownie compile
+
+brownie run scripts/deploy.py: 
+DrugManufacturer deployed at: 0xe895433F3DA8825f50C093c523d3E691Fe4C78D5
+
+brownie run scripts/deploy_distributor_V2.py: 
+Distributor contract deployed at:  0x5b14268c62e368DFC9e1C1e47bc4f1BC12802497
+
+
+brownie console
+contract = DrugManufacturer.at("0xe895433F3DA8825f50C093c523d3E691Fe4C78D5")
+# or 
+contract = DrugManufacturer[-1]
+#getting the address:
+print(manufacturer.address)
+
+
+
+# creating a new batch
+account = accounts[0]
+tx = contract.createBatch("Paracetamol", 500, {"from": account})  
+print(tx.txid)  # shows the transaction 
+
+
+print(contract.getBatch(0))
+
+
+#update batch status:
+batch_id = 0
+new_status = "Delivered"
+tx_update = contract.updateBatchStatus(batch_id, new_status, {"from": account})
+print(f"Batch status updated: {tx_update.txid}")
+
+
+#creating a new distributor:
+distributor.createDistribution(0, manufacturer.address, accounts[1], {"from": account})
+
+#validateBatch
+distributor.validateBatch(manufacturer.address, 0)
+
+
+#updateStatus
+distributor.updateStatus(0, "In Transit", {"from": account})
+
+
+distributor.getDistribution(0)
+
+
+tx = distributor.updateStatus(0, "Delivered", {"from": account})
+print(tx.events["StatusUpdated"])

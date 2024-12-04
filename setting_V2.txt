@@ -1,0 +1,6 @@
+ganache --hardfork istanbul --miner.blockGasLimit 12000000
+brownie compile
+brownie run scripts/deploy_factory.py
+brownie test -s
+
+brownie console --network development
