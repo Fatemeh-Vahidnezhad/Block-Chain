@@ -127,7 +127,7 @@ receiver_account = accounts[2]
 
 2. **Receive a Product:**
    ```python
-   pharmacy.receiveProduct("Aspirin", 100, {"from": distributor})
+   pharmacy.receiveProduct("VaccineBatch", 100, {"from": distributor})
    ```
 
 3. **Sell a Product:**
