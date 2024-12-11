@@ -121,7 +121,7 @@ receiver_account = accounts[2]
 1. **Deploy Pharmacy Contract:**
    ```python
    account = accounts[3]
-   pharmacy = PharmacyAndHospital.deploy({"from": account})
+   pharmacy = PharmacyAndHospital.deploy(distributor.address, {"from": account})
    print(f"Pharmacy deployed at: {pharmacy.address}")
    ```
 
